@@ -1,0 +1,571 @@
+---
+title: "Totota Analysis"
+author: "Sakthivel Sinnasamy"
+date: "11/02/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction
+
+Using the collected data from Toyota dealership in order to understand the relationship between the outcome of interest, dependent variable Price with other sets of factors or independent variables. 
+
+
+## Section 1
+
+  Linear regression analysis is a suitable analysis method to analyse the given model. The primary objective of this analysis is to provide an inference on the relationship between the outcome of interest, variable price with the other sets of factors or variable in the dataset. Since the outcome of interest, variable price is a numerical variable, the common analysis method used to understand the connection between the dependent variable; price and other independent variable in the collected data. As mentioned by (Worster et al., 2007), to be suitable for linear regression the outcome of interest must be a variable that is not categorical instead must be a continuous numerical range variable, which in this case Price is a continuous numerical range variable. Assuming the data verifies to the linear regression analysis assumption which is that the dependent variable follows normal distribution, has linear relationship with predictors, observation independent of one another, and homoscedastic; where across the regression line the variance of the residuals are the same then the linear regression analysis is a suitable for this model (Uyanık & Güler, 2013). Furthermore, linear regression analysis enables multiple linear regression where there can only be single outcome of interest but 2 or more predictor variables. According to the task objective there is single outcome of interest; Price that need to be explained on its relationship with a set of predictor variable, adding the suitability of using linear regression analysis. 
+
+(238 words)
+
+	
+## Section 2
+
+### Model A
+
+Regression model:-
+price = age_08_04 + km + fuel_type + met_color + weight
+
+Regression equation:-
+$$E(PRICE_i) = INTERCEPT + \beta_1age0804_{i1} + \beta_2km_{i2} + \beta_3diesel_{i3} + \beta_4petrol_{i4} + \beta_5metallic_{i5} + \beta_6weight_{i6} + \epsilon_i$$
+  In model A, independent variable age_08_04 is selected as it is well known that an older car depreciates in value compare to a newer car. KM independent variable is selected because the more mileage in the car indicates a higher wear and tear resulting price drop (Englmaier et al., 2013). Fuel type is also selected due to the correlation with driving cost that fluctuates with different vehicles and its fuel type (National Research Council, 1992). As per Greim (2017), metallic paint, engine size and weight of a car has positive influence on the residual value of a car. Hence the independent variable met_color, cc and weight have been selected to be the independent variable deeming that these variables have a relationship on the outcome of interest; Price in this case.  
+
+### Model B
+
+Regression model:-
+price = age_08_04 + km + fuel_type + cc + automatic
+
+Regression equation:-
+$$E(PRICE_i) = INTERCEPT + \beta_1age0804_{i1} + \beta_2km_{i2} + \beta_3diesel_{i3} + \beta_4petrol_{i4} + \beta_5cc_{i5} + \beta_6automatic_{i6} + \epsilon_i$$
+  In model B, age and km independent variable were selected for similar reasons. In addition to this variables, fuel_type variable were also chosen to identify its relationship with price.This is because fuel economy directly influences the cost of driving and the fluctuations of fuel price correlates to the willingness of customers to pay more or less for fuel economy. Hence fuel type influences car purchase decision, there in the outcome of interest which is the car price (National Research Council, 1992). Independent variables engine size; cc and transmission; automatic have significant and positive influence on the price of the car (Greim, 2017).  
+
+### Model C
+
+Regression model:-
+price = age_08_04 + km + hp + abs + airco
+
+Regression equation:-
+$$E(PRICE_i) = INTERCEPT + \beta_1age0804_{i1} + \beta_2km_{i2} + \beta_3hp_{i3} + \beta_4withantilockbrakesystem_{i4} + \beta_5airconditioning_{i5} + \epsilon_i$$
+  For model C, independent variable age_08_04 is selected as it is well known that an older car depreciates in value compare to a newer car.KM independent variable is selected because the more mileage in the car indicates a higher wear and tear resulting price drop (Englmaier et al., 2013). According to Greim (2017), horsepower;hp, airconditioning; airco and brake;abs also has significant relationship with the price of a car.  
+
+(293 words)
+
+
+## Section 3
+
+![Illustration of workflow for data science](workflow.jpg)
+
+### Import
+Import is the first workflow stage that is required for the data science project. The objective to achieve in import stage loading data into the R data frame. The loaded will be used to perform data science in R. In this case the Toyota dataset is available in Comma Separated Value .csv file format. Using RStudio, “readr” package will be required to be installed and loaded to library to add the dataset in the RStudio environment. The skills required is to use R code “read_csv” to read the Toyota dataset. Possible challenges are that users may find RStudio may unable to find the package in its library, thereby additional steps need to be taken install “readr” or “tidyverse” package which enables “readr” to be used.
+
+### Tidy
+The next stage is to tidy up the data’s in the dataset. The objective of this stage is to tidy up data so that each column of the data is a variable and each row of the data is an observation. The package that will be useful for tidy stage is the “janitor” package which must be loaded in RStudio. The skills required is to examine the Toyota dataset for inconsistency and also skills to use functions in “janitor” package as required. Challenges that are faced is the time spent in examining every single observation row for any inclusion of variables especially for large datasets. 
+
+### Transform
+The objective of the transform stage is to narrow down the Toyota dataset by creating a subset of the variables from the main dataset. This subset of variables will be wrangled further to obtain desired observation, statistic or outputs. The packages that will be used in this stage is the “dplyr” package loaded in RStudio.  The skills required in this stage to successfully manipulate the variable using “dplyr” functions such as “select()” to generate narrowed down variables dataset, “filter()” to extract data based constrain parameters, “rename()” to create a new mutated variable and others according model output requirement. The challenges faced is that wrong manipulation could result in incorrect observation output and the relationship between the outcome variable and predictors will not be accurate. Another challenge is irrelevant variables are manipulated resulting in desired output unable to be achieved. 
+
+### Visualisation 
+Visualisation stage objective is to visualise the data for interpretation. This will assist in identifying outliers, unexpected data variability, and questioning unusual data. The required package for this stage is the “ggplot2” package loaded in RStudio. The skill required for this stage is the ability to spot outliers or interpret the visualisation to identify the unusual data instances. The challenge is the ability to identify data instances that are outliers. 
+
+### Model
+In model stage, the objective is to model applying multiple linear regression on the selected outcome and predictor variable of the Toyota dataset, tidying the result and assessing the model. The required packages for this stages is the “broom” and “kableExtra” packages which enables to use functions like “augment()”, “tidy()”, “glance()” and “kable()’. The required skill is the ability to understand why certain data point is much different with the rest. The challenge is to determine what is the appropriate range for identifying the outliers, as too many data instances could be disregarded if the range parameter not determined appropriately.
+
+### Communication
+Communication stage where the output results are interpreted and communicated to others. The skill required is too interpret the relationship between predictor variable and outcome variable based on the results output. Challenge is correctly interpreting the estimate and p value. 
+
+(585 words)
+
+
+# Analysis
+
+## Import
+
+### Load libraries to do analysis
+
+```{r}
+library(tidyverse) 
+library(janitor)
+library(broom)
+library(readxl)
+library(kableExtra)
+```
+
+### Read data in the folder of project directory
+
+```{r}
+toyota <- read_csv('Toyota_corolla.csv')
+```
+
+
+## Tidy
+
+### Clean data
+
+```{r}
+toyota <- toyota %>% 
+  clean_names()
+```
+
+
+### View data
+
+```{r}
+summary(toyota)
+```
+
+
+## Transform
+
+### Select variable
+
+#### Model A
+```{r}
+toyotaA <- toyota %>% 
+  select(id, price, age_08_04, km, fuel_type, met_color, weight)
+glimpse(toyotaA)
+```
+
+#### Model B
+```{r}
+toyotaB <- toyota %>% 
+  select(id, price, age_08_04, km, fuel_type, cc, automatic)
+glimpse(toyotaB)
+```
+
+#### Model C
+```{r}
+toyotaC <- toyota %>% 
+  select(id, price, age_08_04, km, hp, abs, airco)
+glimpse(toyotaC)
+```
+
+### Mutate variables
+
+#### Model A
+```{r}
+toyotaA <- toyotaA %>% 
+  mutate(met_color = factor(met_color,
+                              label = c('No', 'Yes')))
+```
+
+#### Model B
+```{r}
+toyotaB <- toyotaB %>% 
+  mutate(automatic = factor(automatic,
+                              label = c('No', 'Yes')))
+```
+
+#### Model C
+```{r}
+toyotaC <- toyotaC %>%
+  mutate(abs = factor(abs,
+                      label = c('No', 'Yes')))
+```
+
+```{r}
+toyotaC <- toyotaC %>%
+  mutate(airco = factor(airco,
+                      label = c('No', 'Yes')))
+```
+
+
+## Section 4
+
+### Categorize a numerical variable and regroup a categorical variable
+
+#### Model A
+```{r}
+toyotaA <- toyotaA %>%
+  mutate(catA = cut(weight,
+                    breaks = c(0, 1134, 1360, 1587, 1814),
+                    labels = c('Passenger cars light', 'Passenger cars compact', 'Passenger cars medium', 'Passenger cars heavy')))
+```
+
+The cut points for the weight variable in model A is chosen due to the cut points being the vehicle size classes of the National Highway Traffic Safety Administrations (NHTSA). This weight classes are used as the standard for New Car Assessment Program (NCAP) testing in United States (U.S.). The cuts point for passenger cars according to the standard; light, above 907kg to below 1134kg; compact, up to 1360kg, medium, up to 1587kg; and heavy, up to 1814kg. 
+The changes to the model parameters are the weight variable was initially a numerical variable. Now the mutated categorical variable catA will result in the multiple linear regression model to have the cut points category to be referenced to the dummy category of “Passenger cars light”. 
+
+(124 words)
+
+
+#### Model B
+```{r}
+toyotaB <- toyotaB %>%
+  mutate(catB = recode(fuel_type,
+                       'Diesel' = 'liquid fuel',
+                       'Petrol' = 'liquid fuel',
+                       'CNG' = 'fuel gas'))
+```
+
+The new categories are chosen so that the fuel types can be segregated by liquid fuel and fuel gas. These two particular categories were chosen to investigate the impact of having gas cylinders on vehicle price. The fuel gas requires gas tanks to be installed in the boot of sedans such as Toyota corolla in our case, which will limit the boot space. This could potentially have a negative impact on the price of the vehicle. 
+The changes to the model parameters is that now Model B’s multiple linear regression model predictor variable catB which replaces fuel_type, will only have ‘liquid fuel’ as a reference category to dummy category ‘fuel gas’.
+
+(111 words)
+
+
+### View data
+
+#### Model A
+```{r}
+summary(toyotaA)
+```
+
+#### Model B
+```{r}
+summary(toyotaB)
+```
+
+#### Model C
+```{r}
+summary(toyotaC)
+```
+
+##### Exploratory data analysis (EDA)
+
+### Summarize data
+
+#### Model A
+```{r}
+options(scipen = 999) 
+toyotaA %>% summarize(mean_age = mean(age_08_04, na.rm = T),
+                      mean_KM = mean(km, na.rm = T),
+                      mean_Weight = mean(weight, na.rm = T),
+                      sd_age = sd(age_08_04, na.rm = T),
+                      sd_KM = sd(km, na.rm = T),
+                      sd_Weight = sd(weight, na.rm = T)) %>% 
+  gather()
+```
+
+#### Model B
+```{r}
+options(scipen = 999) 
+toyotaB %>% summarize(mean_age = mean(age_08_04, na.rm = T),
+                      mean_KM = mean(km, na.rm = T),
+                      mean_cc = mean(cc, na.rm = T),
+                      sd_age = sd(age_08_04, na.rm = T),
+                      sd_KM = sd(km, na.rm = T),
+                      sd_cc = sd(cc, na.rm = T)) %>% 
+  gather()
+```
+
+#### Model C
+```{r}
+options(scipen = 999) 
+toyotaC %>% summarize(mean_age = mean(age_08_04, na.rm = T),
+                      mean_KM = mean(km, na.rm = T),
+                      mean_hp = mean(hp, na.rm = T),
+                      sd_age = sd(age_08_04, na.rm = T),
+                      sd_KM = sd(km, na.rm = T),
+                      sd_hp = sd(hp, na.rm = T)) %>% 
+  gather()
+```
+
+
+## Visualise
+
+#### Model A
+Age of cars
+```{r}
+ggplot(toyotaA, aes(age_08_04)) + geom_histogram(color="#99CC00", fill="#99CC00")
+```
+
+Mileage
+```{r}
+ggplot(toyotaA, aes(km)) + geom_histogram(color="lightblue", fill="lightblue") 
+```
+
+Metallic colour, Fuel type, catA (Count)
+```{r}
+toyotaA %>% 
+  count(met_color, fuel_type, catA)
+```
+
+Fuel type (count) plot
+```{r}
+ggplot(toyotaA, aes(fuel_type)) + geom_bar(color="lightpink", fill="lightpink") 
+```
+
+Metallic color (count)plot
+```{r}
+ggplot(toyotaA, aes(met_color)) + geom_bar(color="#996666", fill="#996666")
+```
+
+Metallic color (count)plot
+```{r}
+ggplot(toyotaA, aes(catA)) + geom_bar(color="orange", fill="orange")
+```
+
+
+#### Model B
+Age of cars
+```{r}
+ggplot(toyotaB, aes(age_08_04)) + geom_histogram(color="#99CC00", fill="#99CC00")
+```
+
+Mileage
+```{r}
+ggplot(toyotaB, aes(km)) + geom_histogram(color="lightblue", fill="lightblue") 
+```
+
+Engine size, cc
+```{r}
+ggplot(toyotaB, aes(cc)) + geom_histogram(color="#FFCC00", fill="#FFCC00")
+```
+
+Automatic, CatB (Count)
+```{r}
+toyotaB %>% 
+  count(automatic, catB)
+```
+
+catB (count) plot
+```{r}
+ggplot(toyotaB, aes(catB)) + geom_bar(color="lightpink", fill="lightpink") 
+```
+
+Automatic (count) plot
+```{r}
+ggplot(toyotaB, aes(automatic)) + geom_bar(color="#996666", fill="#996666")
+```
+
+
+#### Model C
+Age of cars
+```{r}
+ggplot(toyotaC, aes(age_08_04)) + geom_histogram(color="#99CC00", fill="#99CC00")
+```
+
+Mileage
+```{r}
+ggplot(toyotaC, aes(km)) + geom_histogram(color="lightblue", fill="lightblue") 
+```
+
+Horsepower
+```{r}
+ggplot(toyotaC, aes(hp)) + geom_histogram(color="#FF6666", fill="#FF6666") 
+```
+
+Anti-lock braking system, air-conditioning (Count)
+```{r}
+toyotaC %>% 
+  count(abs, airco)
+```
+
+Anti-lock braking system (count) plot
+```{r}
+ggplot(toyotaC, aes(abs)) + geom_bar(color="#99CCCC", fill="#99CCCC") 
+```
+
+Air-conditioning (count)plot
+```{r}
+ggplot(toyotaC, aes(airco)) + geom_bar(color="#6699FF", fill="#6699FF")
+```
+
+
+## Model 
+
+### Multiple Linear Regression
+
+#### Model A
+```{r}
+modA_mlr <- lm(price ~ age_08_04 + km + fuel_type + 
+                met_color + catA, data = toyotaA)
+```
+
+#### Model B
+```{r}
+modB_mlr <- lm(price ~ age_08_04 + km + catB + 
+               automatic + cc, data = toyotaB)
+```
+
+#### Model C
+```{r}
+modC_mlr <- lm(price ~ age_08_04 + km + hp +
+                 abs + airco, data = toyotaC)
+```
+
+
+### View data
+
+#### Model A
+```{r}
+summary(modA_mlr)
+```
+
+#### Model B
+```{r}
+summary(modB_mlr)
+```
+
+#### Model C
+```{r}
+summary(modC_mlr)
+```
+
+### View tidied result
+
+#### Model A
+```{r}
+tidy(modA_mlr)
+```
+
+#### Model B
+```{r}
+tidy(modB_mlr)
+```
+
+#### Model C
+```{r}
+tidy(modC_mlr)
+```
+
+### Generate predicted and residuals value
+
+#### Model A
+```{r}
+modA_mlr_fit <- augment(modA_mlr)
+modA_mlr_fit
+```
+
+#### Model B
+```{r}
+modB_mlr_fit <- augment(modB_mlr)
+modB_mlr_fit
+```
+
+#### Model C
+```{r}
+modC_mlr_fit <- augment(modC_mlr)
+modC_mlr_fit
+```
+
+### Assess model
+
+#### Model A
+```{r}
+ggplot(modA_mlr_fit, aes(x = .fitted, y = .resid)) +
+  geom_point(color="red")
+```
+
+```{r}
+modA_mlr_fit2 <- modA_mlr_fit %>% 
+  filter(.resid > -7500 ,
+         .fitted < 25000) 
+
+ggplot(modA_mlr_fit2, aes(x = .fitted, y = .resid)) +
+  geom_point(color="#0000FF")
+```
+
+
+#### Model B
+```{r}
+ggplot(modB_mlr_fit, aes(x = .fitted, y = .resid)) +
+  geom_point(color="red")
+```
+
+```{r}
+modB_mlr_fit2 <- modB_mlr_fit %>% 
+  filter(.resid < 10000 ,
+         .fitted < 22500) 
+
+ggplot(modB_mlr_fit2, aes(x = .fitted, y = .resid)) +
+  geom_point(color="#0000FF")
+```
+
+Re- estimate multiple linear regression with fited data (Outliers are removed due to erroneous data i.e. cc=16000)
+```{r}
+modB_mlr2 <- lm(price ~ age_08_04 + km + catB + 
+               automatic + cc, data = modB_mlr_fit2)
+tidy(modB_mlr2)
+```
+
+
+#### Model C
+```{r}
+ggplot(modC_mlr_fit, aes(x = .fitted, y = .resid)) +
+  geom_point(color="red")
+```
+
+```{r}
+modC_mlr_fit2 <- modC_mlr_fit %>% 
+  filter(.resid < 10000,
+         .fitted < 25000) 
+
+ggplot(modC_mlr_fit2, aes(x = .fitted, y = .resid)) +
+  geom_point(color="#0000FF")
+```
+
+Re- estimate multiple linear regression with fited data (Outliers are removed)
+```{r}
+modC_mlr2 <- lm(price ~ age_08_04 + km + hp +
+                 abs + airco, data = modC_mlr_fit2)
+tidy(modC_mlr2)
+```
+
+### Present linear regression result
+
+#### Model A
+```{r}
+options(scipen = 999)
+modA_model <- tidy(modA_mlr, conf.int = TRUE)
+kable(modA_model) %>%
+  kable_styling()
+```
+
+#### Model B
+```{r}
+options(scipen = 999)
+modB_model <- tidy(modB_mlr2, conf.int = TRUE)
+kable(modB_model) %>%
+  kable_styling()
+```
+
+#### Model C
+```{r}
+options(scipen = 999)
+modC_model <- tidy(modC_mlr2, conf.int = TRUE)
+kable(modC_model) %>%
+  kable_styling()
+```
+# Discussion
+
+## Communicate
+
+## Section 5
+
+Process of model assessment
+
+The process to assess the multiple linear regression is to use the ggplot2 package to plot a residual vs fitted plot to identify the outliers. For this, we use the estimation linear regression model which will be fitted in scatter plot. There is a linear relationship between the residual (observed price of vehicle) and the fitted (predicted price of the vehicle). Any outlier that do not confirm with the linearity will be further analysed whether they actually are outliers. After deciding, the outliers is either retained or removed by range, plotting another fitted vs residual value that now conforms on linearity between the observed price and predicted price.  
+
+Comment of the findings
+
+In model A, due to a p-value of more than the common alpha level of 0.05, it is indicative that predictor variables ‘fuel_typeDiesel’, ‘fuel_typePetrol’, ‘met_colorYes’, ‘catAPassenger cars heavy’ are not statistically significant, therefore the change in these predictor variable has no effect on outcome variable; Price of vehicle. Predictor variable vehicle age in month and mileage has negative affect on price, where for every 1 month increase in age, the price reduces by €144 and similarly for every increase of 1km mileage, the price is reduced by €0.02. Compact and medium passenger car is €2507 and €10037 more expensive respectively compared to light passenger car. 
+In model B, similar results were obtained for predictor variables vehicle age in month from august 2004 and mileage. P-value for liquid fuel vehicle type is higher than common alpha value 0.05 hence deemed to have no effect on price. Automatic transmission vehicle price is €739 higher than manual transmission vehicle price. For ever 1 cubic capacity increase in engine size, €2.40 increase in vehicle price is detected. 
+For model C, besides age in month and mileage predictor variables which have almost similar effect as in above models, ever 1hp increase in horsepower, the vehicle price goes up by €32 and vehicles with air-conditioning is €571 more expensive than vehicle without air-conditioning. Vehicles with anti-lock braking system however is €572 cheaper than vehicle with ABS, which is a questionable output, that could be due to metadata error. 
+
+Suggested measures to improve
+
+By adding interaction plots between all 5 of the predictor variables to the outcome variable to understand possible interactions among variables (Burrill, 1997). Also checking for multicollinearity will help in reducing unreliability of the linear regression model. 
+
+(385 words)
+
+
+# Reference
+
+Burrill, D. F. (1997). Modeling and interpreting interactions in multiple regression. The Ontario Institute for Studies in Education Toronto, Ontario Canada.
+
+Englmaier, F., Schmöller, A., & Stowasser, T. (2013). Price discontinuities in an online used car market.
+
+Greim, L. (2017). Impact of the model life cycle on the residual car value in the leasing industry (Master's thesis, University of Twente).
+
+National Research Council. (1992). Automotive fuel economy: How far can we go?. National Academies Press.
+
+Schnitman, R. A Short Introduction to Applied Statistical Programming in R.
+
+Uyanık, G. K., & Güler, N. (2013). A study on multiple linear regression analysis. Procedia-Social and Behavioral Sciences, 106, 234-240.
+
+Worster, A., Fan, J., & Ismaila, A. (2007). Understanding linear and logistic regression analyses. Canadian Journal of Emergency Medicine, 9(2), 111-113.
+
+
+
